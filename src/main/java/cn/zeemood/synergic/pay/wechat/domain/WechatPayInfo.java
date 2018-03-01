@@ -1,10 +1,9 @@
 package cn.zeemood.synergic.pay.wechat.domain;
 
-import java.io.IOException;
-
+import cn.zeemood.synergic.pay.wechat.utils.WechatPayConfigurations;
 import com.alibaba.fastjson.JSON;
 
-import cn.zeemood.synergic.pay.wechat.utils.WechatPayConfigurations;
+import java.io.IOException;
 
 /**
  * 微信支付信息实体类
@@ -50,6 +49,30 @@ public class WechatPayInfo {
 	private String trade_type;
 	// 该字段用于统一下单时上报场景信息，目前支持上报实际门店信息，设置成对象的json
 	private String scene_info;
+
+	/**
+	 * 设置必填的自定义参数
+	 * @param body
+	 * @param out_trade_no
+	 * @param total_fee
+	 * @param notify_url
+	 * @param trade_type
+	 * @throws IOException
+	 */
+	public WechatPayInfo(String body, String out_trade_no,
+									  int total_fee, String notify_url,
+									  String trade_type,String spbill_create_ip) throws IOException {
+		this.body = WechatPayConfigurations.getAppName()+"-"+body;
+		this.out_trade_no = out_trade_no;
+		this.notify_url = notify_url;
+		this.trade_type = trade_type;
+		this.spbill_create_ip = spbill_create_ip;
+		if(!WechatPayConfigurations.getPayEnvironment()){
+			this.total_fee=1;
+		}else{
+			this.total_fee=total_fee;
+		}
+	}
 	
 	//获取订单总价，可自行修改，主要是根据不同环境切换不同的支付价格
 	public int getTotal_fee(){

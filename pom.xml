@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.zeemood</groupId>
 	<artifactId>synergic-developing</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>synergic-developing</name>
 	<description>三方支付，三方登录工具类</description>
 
@@ -51,7 +51,6 @@
 			<version>4.0.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 
 	</dependencies>
 </project>
