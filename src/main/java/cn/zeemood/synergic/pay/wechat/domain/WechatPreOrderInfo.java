@@ -1,5 +1,7 @@
 package cn.zeemood.synergic.pay.wechat.domain;
 
+import java.util.Date;
+
 /**
  * 微信预支付订单返回信息
  * @author zhang.shushan
@@ -51,6 +53,14 @@ public class WechatPreOrderInfo {
 			return "SUCCESS".equals(this.result_code);
 		}
 		return false;
+	}
+
+	public String getPackage(){
+		return "WXPay";
+	}
+
+	public Long getTimestamp(){
+		return new Date().getTime()/1000;
 	}
 
 	public String getReturn_code() {
