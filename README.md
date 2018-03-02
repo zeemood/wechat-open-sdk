@@ -1,6 +1,11 @@
 # synergic-developing
 java版的支付工具类（支付宝/微信），三方登录工具类
-使用方法：
+使用方法(v1.1.0):
+1.添加支付宝支付的服务端sdk，免去mvn安装。
+2.使用方法重载的思路，把微信支付助手和支付宝支付助手两个工具类合并在成PayAssistant，把应答远端服务器的方法名改成echo
+3.完善了微信登录的工具类和配置文件模版
+====================================================
+使用方法（v1.0.1，详见https://www.imooc.com/article/23605）：
 1.使用前准备：maven安装支付宝支付的java服务端sdk，指令参考：
 安装jar：mvn install:install-file -Dfile=d:/alipay-sdk-java20180104135026.jar -DgroupId=com.alipay -DartifactId=sdk -Dversion=20180104135026 -Dpackaging=jar
 
