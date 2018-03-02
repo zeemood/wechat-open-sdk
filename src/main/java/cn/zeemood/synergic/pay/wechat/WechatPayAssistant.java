@@ -29,6 +29,21 @@ import cn.zeemood.synergic.pay.wechat.utils.WechatPayConfigurations;
  */
 public class WechatPayAssistant {
 
+	/**
+	 * 异步回调应答
+	 * @return
+	 * @throws Exception
+	 */
+	public static String echo() throws Exception{
+		return "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
+	}
+
+	/**
+	 * 异步回调应答
+	 * @return
+	 * @throws Exception
+	 */
+	@Deprecated
 	public static String responseTo() throws Exception {
 		return "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
 	}
@@ -62,7 +77,6 @@ public class WechatPayAssistant {
 	 * 微信预支付订单
 	 * 
 	 * @param payInfo
-	 * @param pay_key
 	 * @return
 	 * @throws Exception
 	 */
@@ -92,7 +106,6 @@ public class WechatPayAssistant {
 	 * 设置签名
 	 * 
 	 * @param obj
-	 * @param pay_key
 	 * @return
 	 * @throws Exception
 	 */
