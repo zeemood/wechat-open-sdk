@@ -20,7 +20,18 @@ public class WechatRefundInfo {
 	private String refund_fee_type="CNY";
 	private String refund_desc;
 	private String refund_account;
-	
+
+	public WechatRefundInfo(String out_trade_no,
+							String out_refund_no,
+							int total_fee,
+							int refund_fee){
+		this.out_refund_no=out_refund_no;
+		this.out_trade_no=out_trade_no;
+		this.total_fee=total_fee;
+		this.refund_fee=refund_fee;
+	}
+
+	@Deprecated
 	public void configMajorParamerters(String out_trade_no,
 			String out_refund_no,
 			int total_fee,

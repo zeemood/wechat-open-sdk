@@ -24,6 +24,8 @@ public class WechatLoginClient {
 
 	//pc端认证界面
 	private final static String AUTH_URL_PC="https://open.weixin.qq.com/connect/qrconnect?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=%s#wechat_redirect";
+
+	private final static String AUTH_URL_OFFICIAL_URL="https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=%s#wechat_redirect";
 	//替换
 	private static final String RPLC="%s";
 	private static Properties props;
@@ -38,19 +40,41 @@ public class WechatLoginClient {
 	}
 	
 	/**
-	 * 电脑端微信登录的链接
-	 * @param notisfy_url 回调地址
+	 * 电脑端微信登录获取code的链接
+	 * @param redirect_url 回调地址
 	 * @param state 携带参数
 	 * @return
 	 * @throws Exception
 	 */
-	public static String getPcAuthUrl(String notisfy_url,String state) throws Exception{
+	public static String getPcAuthUrl(String redirect_url,String state) throws Exception{
 		String url=AUTH_URL_PC;
 		try {
-			if(notisfy_url!=null&&!"".equals(notisfy_url)){
-				url=url.replaceFirst(RPLC, getPcAppid()).replaceFirst(RPLC, URLEncoder.encode(getPcRedirectUrl(), "UTF-8"));
+			if(redirect_url!=null&&!"".equals(redirect_url)){
+				url=url.replaceFirst(RPLC, getPcAppid()).replaceFirst(RPLC,URLEncoder.encode(redirect_url,"UTF-8"));
 			}else{
-				url=url.replaceFirst(RPLC, getPcAppid()).replaceFirst(RPLC, URLEncoder.encode(notisfy_url,"UTF-8"));
+				url=url.replaceFirst(RPLC, getPcAppid()).replaceFirst(RPLC, URLEncoder.encode(getPcRedirectUrl(),"UTF-8"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return url;
+	}
+
+	/**
+	 * 公众号获取code的链接
+	 * @param redirect_url
+	 * @param state
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getOfficialAccAuthUrl(String redirect_url,String state)throws Exception{
+		String url=AUTH_URL_OFFICIAL_URL;
+		try {
+			if(redirect_url!=null&&!"".equals(redirect_url)){
+				url=url.replaceFirst(RPLC, getOfficialAccAppid()).replaceFirst(RPLC, URLEncoder.encode(redirect_url, "UTF-8")).replaceFirst(RPLC,state);
+			}else{
+				url=url.replaceFirst(RPLC, getOfficialAccAppid()).replaceFirst(RPLC, URLEncoder.encode(getOfficialAccRedirectUrl(),"UTF-8")).replaceFirst(RPLC,state);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,23 +89,44 @@ public class WechatLoginClient {
 	 * @return
 	 * @throws Exception
 	 */
-	public static WechatUserInfo getUserInfoByCode(Code4AccessToken code) throws Exception{
-		AccessToken4UserInfo accessToken = getAccessToken(code);
+	public static WechatUserInfo getUserInfoByCode4PC(Code4AccessToken code) throws Exception{
+		AccessToken4UserInfo accessToken = getAccessToken(code,getPcAppid(),getPcSecret());
 		return getUserInfo(accessToken);
 	}
-	
+
+	/**
+	 * 通过Code获取用户信息
+	 * @param code
+	 * @return
+	 * @throws Exception
+	 */
+	public static WechatUserInfo getUserInfoByCode4App(Code4AccessToken code) throws Exception{
+		AccessToken4UserInfo accessToken = getAccessToken(code,getAppid(),getAppSecret());
+		return getUserInfo(accessToken);
+	}
+	/**
+	 * 通过Code获取用户信息
+	 * @param code
+	 * @return
+	 * @throws Exception
+	 */
+	public static WechatUserInfo getUserInfoByCode4OffcialAcc(Code4AccessToken code) throws Exception{
+		AccessToken4UserInfo accessToken = getAccessToken(code,getOfficialAccAppid(),getOfficialAccSecret());
+		return getUserInfo(accessToken);
+	}
+
 	/**
 	 * 获取access_token
 	 * @param code
 	 * @return
 	 * @throws Exception
 	 */
-	protected static AccessToken4UserInfo getAccessToken(Code4AccessToken code) throws Exception{
+	public static AccessToken4UserInfo getAccessToken(Code4AccessToken code,String appid,String appSecret) throws Exception{
 		URI url = new URIBuilder().setScheme("https")
-				.setHost("open.weixin.qq.com")
+				.setHost("api.weixin.qq.com")
 				.setPath("/sns/oauth2/access_token")
-				.setParameter("appid", getPcAppid())
-				.setParameter("secret", getPcSecrect())
+				.setParameter("appid", appid)
+				.setParameter("secret", appSecret)
 				.setParameter("code", code.getCode())
 				.setParameter("grant_type","authorization_code")
 				.build();
@@ -98,44 +143,67 @@ public class WechatLoginClient {
 	 * @return
 	 * @throws Exception
 	 */
-	protected static WechatUserInfo getUserInfo(AccessToken4UserInfo token) throws Exception{
+	public static WechatUserInfo getUserInfo(AccessToken4UserInfo token) throws Exception{
 		URI url = new URIBuilder().setScheme("https")
-				.setHost("open.weixin.qq.com")
+				.setHost("api.weixin.qq.com")
 				.setPath("/sns/userinfo")
 				.setParameter("access_token", token.getAccess_token())
-				.setParameter("openid", token.getOpernid())
+				.setParameter("openid", token.getOpenid())
 				.build();
 		String json = HttpClientUtils.connectByGet(url);
 		WechatUserInfo obj = JSON.parseObject(json, WechatUserInfo.class);
 		isSuccess(obj);
 		return obj;
 	}
-	
-	
+
+	/**
+	 * 公众号授权回调地址
+	 * @return
+	 */
+	public static String getOfficialAccRedirectUrl(){
+		return props.getProperty("wechat.official_acc.redirect_url");
+	}
+
 	/**
 	 * 网页应用的回调地址
 	 * @return
 	 */
-	protected static String getPcRedirectUrl(){
+	public static String getPcRedirectUrl(){
 		return props.getProperty("wechat.pc.redirect_url");
 	}
-	
+
 	/**
 	 * 网页应用的密钥
 	 * @return
 	 */
-	protected static String getPcSecrect(){
-		return props.getProperty("wechat.pc.secrect");
+	public static String getPcSecret(){
+		return props.getProperty("wechat.pc.secret");
+	}
+
+	/**
+	 * 公众号的密钥
+	 * @return
+	 */
+	public static String getOfficialAccSecret(){
+		return props.getProperty("wechat.official_acc.secret");
 	}
 	
 	/**
 	 * 网页应用的appid
 	 * @return
 	 */
-	protected static String getPcAppid(){
+	public static String getPcAppid(){
 		return props.getProperty("wechat.pc.appid");
 	}
-	
+
+	/**
+	 * 公众号的appid
+	 * @return
+	 */
+	public static String getOfficialAccAppid(){
+		return props.getProperty("wechat.official_acc.appid");
+	}
+
 	/**
 	 * 是否成功
 	 * @param obj
@@ -146,4 +214,21 @@ public class WechatLoginClient {
 			throw new RuntimeException(obj.getErrcode()+">>"+obj.getErrmsg());
 		}
 	}
+
+	/**
+	 * 获取移动应用的appid
+	 * @return
+	 */
+	public static String getAppid() {
+		return props.getProperty("wechat.app.appid");
+	}
+
+	/**
+	 * 获取移动应用的密钥
+	 * @return
+	 */
+	public static String getAppSecret() {
+		return props.getProperty("wechat.app.secret");
+	}
+
 }

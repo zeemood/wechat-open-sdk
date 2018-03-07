@@ -14,7 +14,7 @@ public class AccessToken4UserInfo extends ErrorDomain{
 	//用户刷新access_token
 	private String refresh_token;
 	//授权用户唯一标识
-	private String opernid;
+	private String openid;
 	
 	public String getAccess_token() {
 		return access_token;
@@ -34,11 +34,11 @@ public class AccessToken4UserInfo extends ErrorDomain{
 	public void setRefresh_token(String refresh_token) {
 		this.refresh_token = refresh_token;
 	}
-	public String getOpernid() {
-		return opernid;
+	public String getOpenid() {
+		return openid;
 	}
-	public void setOpernid(String opernid) {
-		this.opernid = opernid;
+	public void setOpenid(String openid) {
+		this.openid = openid;
 	}
 	public String getScope() {
 		return scope;

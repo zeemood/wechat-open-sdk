@@ -5,6 +5,10 @@ import java.util.Map;
 
 import cn.zeemood.synergic.pay.wechat.domain.WechatPayError;
 
+/**
+ * 错误工具类，这里用枚举类会更好，不过我真的懒得去看文档改了，这个类也不是很重要，不搞了
+ * @author zhang.shushan
+ */
 public class WeChatPayErrorUtil {
 
 	private static Map<String, WechatPayError> errs = new HashMap<>();

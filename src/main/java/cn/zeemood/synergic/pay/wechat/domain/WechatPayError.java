@@ -35,7 +35,8 @@ public class WechatPayError {
 			this.err_resolve = err_resolve;
 			return this;
 		}
-		
+
+		@Override
 		public String toString(){
 			return "WechatPayErrorBuilder[err_code_des="+this.err_code_des+",err_cause="+this.err_cause+",err_resolve="+err_resolve+"]";
 		}

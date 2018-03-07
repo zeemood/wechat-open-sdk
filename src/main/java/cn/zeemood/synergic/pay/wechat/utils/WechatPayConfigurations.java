@@ -104,6 +104,11 @@ public class WechatPayConfigurations {
 		return props.getProperty("wechat.pay.refund.certificate.path");
 	}
 
+	/**
+	 * 移动应用的退款密码
+	 *
+	 * @return
+	 */
 	public static String getRefundCertificatePassword() {
 		// TODO Auto-generated method stub
 		return props.getProperty("wechat.pay.refund.certificate.password");

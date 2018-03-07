@@ -1,3 +1,7 @@
+
 .idea
+src/main/main.iml
 synergic-developing.iml
 target
+hs_err_pid*.log
+relay_pid*.log

@@ -3,6 +3,10 @@ package cn.zeemood.synergic.pay.alipay.utils;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * 支付宝支付配置对象
+ * @author zhang.shushan
+ */
 public class AlipayConfigurations {
 
 	private static Properties props;
@@ -14,6 +18,8 @@ public class AlipayConfigurations {
 			e.printStackTrace();
 		}
 	}
+
+	public final static String GATE_URL="https://openapi.alipay.com/gateway.do";
 	
 	/**
 	 * 支付宝支付公钥

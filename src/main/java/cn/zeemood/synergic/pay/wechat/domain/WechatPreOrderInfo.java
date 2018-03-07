@@ -53,6 +53,30 @@ public class WechatPreOrderInfo {
 		return false;
 	}
 
+	/**
+	 * 固定字段
+	 * @return
+	 */
+	public String getPackage(){
+		return "WXPay";
+	}
+
+	/**
+	 * 时间戳
+	 * @return
+	 */
+	public Long getTimestamp(){
+		return System.currentTimeMillis()/1000;
+	}
+
+	/**
+	 * 返回商户Id
+	 * @return
+	 */
+	public String getPartnerId(){
+		return mch_id;
+	}
+
 	public String getReturn_code() {
 		return return_code;
 	}
