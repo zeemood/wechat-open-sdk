@@ -108,14 +108,14 @@ public class AlipayMobilePublicMultiMediaClient implements AlipayClient {
     }
 
     /** 
-     * @see AlipayClient#execute(AlipayRequest)
+     * @see com.alipay.api.AlipayClient#execute(com.alipay.api.AlipayRequest)
      */
     public <T extends AlipayResponse> T execute(AlipayRequest<T> request) throws AlipayApiException {
         return execute(request, null);
     }
 
     /** 
-     * @see AlipayClient#execute(AlipayRequest, String)
+     * @see com.alipay.api.AlipayClient#execute(com.alipay.api.AlipayRequest, java.lang.String)
      */
     public <T extends AlipayResponse> T execute(AlipayRequest<T> request,
                                                 String accessToken) throws AlipayApiException {
@@ -124,7 +124,7 @@ public class AlipayMobilePublicMultiMediaClient implements AlipayClient {
     }
 
     /** 
-     * @see AlipayClient#execute(AlipayRequest, String, String, String)
+     * @see com.alipay.api.AlipayClient#execute(com.alipay.api.AlipayRequest, java.lang.String, java.lang.String, java.lang.String)
      */
     public <T extends AlipayResponse> T execute(AlipayRequest<T> request, String accessToken,
                                                 String appAuthToken) throws AlipayApiException {

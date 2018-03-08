@@ -131,14 +131,14 @@ public class AlipayMobilePublicMultiMediaDownloadRequest implements
     }
 
     /** 
-     * @see AlipayRequest#isNeedEncrypt()
+     * @see com.alipay.api.AlipayRequest#isNeedEncrypt()
      */
     public boolean isNeedEncrypt() {
         return false;
     }
 
     /** 
-     * @see AlipayRequest#setNeedEncrypt(boolean)
+     * @see com.alipay.api.AlipayRequest#setNeedEncrypt(boolean)
      */
     public void setNeedEncrypt(boolean needEncrypt) {
 
