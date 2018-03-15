@@ -49,6 +49,33 @@ public class WechatPayInfo {
     private String trade_type;
     // 该字段用于统一下单时上报场景信息，目前支持上报实际门店信息，设置成对象的json
     private String scene_info;
+    //微信公众号支付必填
+    private String openid;
+    //限制使用信用卡支付
+    private String limit_pay;
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getLimit_pay() {
+        return limit_pay;
+    }
+
+    public void setLimit_pay(String limit_pay) {
+        this.limit_pay = limit_pay;
+    }
+
+    /**
+     * 设置限制使用信用卡
+     */
+    public void configureLimitPay(){
+        this.limit_pay="no_credit";
+    }
 
     /**
      * 设置必填的自定义参数

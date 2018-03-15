@@ -369,7 +369,7 @@ public class AlipayAssistant {
         // 切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
         // boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String
         // publicKey, String charset, String sign_type)
-        boolean flag = AlipaySignature.rsaCheckV1(params, AlipayConfigurations.getPublicKey(), "UTF-8", "RSA2");
+        boolean flag = AlipaySignature.rsaCheckV1(params, AlipayConfigurations.getPublicKey(), AlipayConstants.CHARSET_UTF8, "RSA2");
         if (!flag) {
             throw new RuntimeException("验签失败");
         }

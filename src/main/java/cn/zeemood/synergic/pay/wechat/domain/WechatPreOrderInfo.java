@@ -58,7 +58,7 @@ public class WechatPreOrderInfo {
 	 * @return
 	 */
 	public String getPackage(){
-		return "WXPay";
+		return "Sign=WXPay";
 	}
 
 	/**
@@ -67,14 +67,6 @@ public class WechatPreOrderInfo {
 	 */
 	public Long getTimestamp(){
 		return System.currentTimeMillis()/1000;
-	}
-
-	/**
-	 * 返回商户Id
-	 * @return
-	 */
-	public String getPartnerId(){
-		return mch_id;
 	}
 
 	public String getReturn_code() {
@@ -180,5 +172,5 @@ public class WechatPreOrderInfo {
 	public void setCode_url(String code_url) {
 		this.code_url = code_url;
 	}
-	
+
 }
