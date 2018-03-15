@@ -266,7 +266,6 @@ public class AlipayAssistant {
      * @return
      * @throws Exception
      */
-    @Deprecated
     public static String preOrder(AlipayTradeAppPayModel model, String suffix) throws Exception{
         return preOrder4App(model,suffix);
     }
@@ -278,7 +277,6 @@ public class AlipayAssistant {
      * @return
      * @throws Exception
      */
-    @Deprecated
     public static String preOrder4App(AlipayTradeAppPayModel model, String suffix) throws Exception {
         // 实例化客户端
         AlipayClient alipayClient = new DefaultAlipayClient(
