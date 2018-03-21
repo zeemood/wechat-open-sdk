@@ -50,7 +50,7 @@ public class AlipayConfigurations {
 	 * @return
 	 */
 	public static boolean getPayEnviroment() {
-		String p = props.getProperty("pay.enviroment");
+		String p = props.getProperty("pay.environment");
 		if(p==null||"".equals(p)){
 			p="dev";
 		}
