@@ -1,34 +1,23 @@
 package cn.zeemood.synergic.pay.alipay;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
 import cn.zeemood.synergic.pay.alipay.domain.AlipayAppPayRet;
+import cn.zeemood.synergic.pay.alipay.utils.AlipayConfigurations;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
-import com.alipay.api.*;
-import com.alipay.api.domain.AlipayTradeAppPayModel;
-import com.alipay.api.domain.AlipayTradePagePayModel;
-import com.alipay.api.domain.AlipayTradeQueryModel;
-import com.alipay.api.domain.AlipayTradeRefundModel;
-import com.alipay.api.domain.AlipayTradeWapPayModel;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.AlipayConstants;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.domain.*;
 import com.alipay.api.internal.util.AlipaySignature;
-import com.alipay.api.request.AlipayTradeAppPayRequest;
-import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.alipay.api.request.AlipayTradeQueryRequest;
-import com.alipay.api.request.AlipayTradeRefundRequest;
-import com.alipay.api.request.AlipayTradeWapPayRequest;
+import com.alipay.api.request.*;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.alipay.api.response.AlipayTradeWapPayResponse;
 
-import cn.zeemood.synergic.pay.alipay.utils.AlipayConfigurations;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * 支付宝支付工具类
@@ -40,13 +29,14 @@ public class AlipayAssistant {
 
     /**
      * 解析支付宝APP支付回调并验签
+     *
      * @param request
      * @param enc
      * @return
      * @throws Exception
      */
-    public static AlipayAppPayRet parseRequest(HttpServletRequest request, boolean enc) throws Exception{
-        return (AlipayAppPayRet) convertMap2Bean(getParamsMap(request.getParameterMap(),enc),AlipayAppPayRet.class);
+    public static AlipayAppPayRet parseRequest(HttpServletRequest request, boolean enc) throws Exception {
+        return (AlipayAppPayRet) convertMap2Bean(getParamsMap(request.getParameterMap(), enc), AlipayAppPayRet.class);
     }
 
     /**
@@ -76,12 +66,12 @@ public class AlipayAssistant {
                 // 私钥
                 AlipayConfigurations.getPrivateKey(),
                 // 固定值json，参数类型，
-                "json",
+                AlipayConstants.FORMAT_JSON,
                 // 编码方式
                 AlipayConstants.CHARSET_UTF8,
                 // 公钥
                 AlipayConfigurations.getPublicKey(),
-                "RSA2");
+                AlipayConstants.SIGN_TYPE_RSA2);
         AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();
         AlipayTradeQueryModel model = new AlipayTradeQueryModel();
         model.setOutTradeNo(out_trade_no);
@@ -93,14 +83,15 @@ public class AlipayAssistant {
 
     /**
      * 手机网页支付
-     * @param model 支付信息模型
+     *
+     * @param model      支付信息模型
      * @param return_url 回跳地址
      * @param notify_url 异步回调地址
      * @return
      * @throws Exception
      */
-    public static String preOrder(AlipayTradeWapPayModel model, String return_url, String notify_url) throws Exception{
-        return preOrder4Wap(model,return_url,notify_url);
+    public static String preOrder(AlipayTradeWapPayModel model, String return_url, String notify_url) throws Exception {
+        return preOrder4Wap(model, return_url, notify_url);
     }
 
     /**
@@ -122,12 +113,12 @@ public class AlipayAssistant {
                 // 私钥
                 AlipayConfigurations.getPrivateKey(),
                 // 固定值json，参数类型，
-                "json",
+                AlipayConstants.FORMAT_JSON,
                 // 编码方式
                 AlipayConstants.CHARSET_UTF8,
                 // 公钥
                 AlipayConfigurations.getPublicKey(),
-                "RSA2");
+                AlipayConstants.SIGN_TYPE_RSA2);
         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
 
         if (return_url != null && !"".equals(return_url)) {
@@ -156,12 +147,12 @@ public class AlipayAssistant {
                 // 私钥
                 AlipayConfigurations.getPrivateKey(),
                 // 固定值json，参数类型，
-                "json",
+                AlipayConstants.FORMAT_JSON,
                 // 编码方式
                 AlipayConstants.CHARSET_UTF8,
                 // 公钥
                 AlipayConfigurations.getPublicKey(),
-                "RSA2");
+                AlipayConstants.SIGN_TYPE_RSA2);
         AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
         request.setBizModel(model);
         AlipayTradeRefundResponse response = alipayClient.execute(request);
@@ -173,14 +164,15 @@ public class AlipayAssistant {
 
     /**
      * 网页支付
-     * @param model 支付信息数据模型
+     *
+     * @param model      支付信息数据模型
      * @param return_url 回跳地址
      * @param notify_url 异步回调地址
      * @return 返回的是一个网页
      * @throws Exception
      */
-    public static String preOrder(AlipayTradePagePayModel model, String return_url, String notify_url) throws Exception{
-        return preOrder4Web(model,return_url,notify_url);
+    public static String preOrder(AlipayTradePagePayModel model, String return_url, String notify_url) throws Exception {
+        return preOrder4Web(model, return_url, notify_url);
     }
 
     /**
@@ -196,8 +188,8 @@ public class AlipayAssistant {
         String html = "";
         // 获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfigurations.GATE_URL,
-                AlipayConfigurations.getAppid(), AlipayConfigurations.getPrivateKey(), "json",
-                AlipayConstants.CHARSET_UTF8, AlipayConfigurations.getPublicKey(), "RSA2");
+                AlipayConfigurations.getAppid(), AlipayConfigurations.getPrivateKey(), AlipayConstants.FORMAT_JSON,
+                AlipayConstants.CHARSET_UTF8, AlipayConfigurations.getPublicKey(), AlipayConstants.SIGN_TYPE_RSA2);
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         if (return_url != null && !"".equals(return_url)) {
             request.setReturnUrl(return_url);
@@ -210,23 +202,25 @@ public class AlipayAssistant {
 
     /**
      * 支付宝APP支付
+     *
      * @param notifyUrl
      * @param model
      * @return
      * @throws Exception
      */
-    public static String preOrder(String notifyUrl,AlipayTradeAppPayModel model) throws Exception{
-        return preOrder4App(notifyUrl,model);
+    public static String preOrder(String notifyUrl, AlipayTradeAppPayModel model) throws Exception {
+        return preOrder4App(notifyUrl, model);
     }
 
     /**
      * 支付宝APP支付
+     *
      * @param notifyUrl
      * @param model
      * @return
      * @throws Exception
      */
-    public static String preOrder4App(String notifyUrl,AlipayTradeAppPayModel model) throws Exception{
+    public static String preOrder4App(String notifyUrl, AlipayTradeAppPayModel model) throws Exception {
         AlipayClient alipayClient = new DefaultAlipayClient(
                 // 支付地址
                 AlipayConfigurations.GATE_URL,
@@ -235,19 +229,19 @@ public class AlipayAssistant {
                 // 私钥
                 AlipayConfigurations.getPrivateKey(),
                 // 固定值json，参数类型，
-                "json",
+                AlipayConstants.FORMAT_JSON,
                 // 编码方式
                 AlipayConstants.CHARSET_UTF8,
                 // 公钥
                 AlipayConfigurations.getPublicKey(),
-                "RSA2");
+                AlipayConstants.SIGN_TYPE_RSA2);
         // 实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
         request.setBizModel(model);
         if (notifyUrl == null || "".equals(notifyUrl)) {
-            throw new RuntimeException("回调地址后缀不能为空");
+            throw new RuntimeException("异步通知回调地址不能为空");
         }
-//        request.setNotifyUrl(AlipayConfigurations.getNotifyUrl(suffix));
+        // request.setNotifyUrl(AlipayConfigurations.getNotifyUrl(suffix));
         request.setNotifyUrl(notifyUrl);
         try {
             // 这里和普通的接口调用不同，使用的是sdkExecute
@@ -261,13 +255,14 @@ public class AlipayAssistant {
 
     /**
      * 支付宝APP预支付
+     *
      * @param model
      * @param suffix
      * @return
      * @throws Exception
      */
-    public static String preOrder(AlipayTradeAppPayModel model, String suffix) throws Exception{
-        return preOrder4App(model,suffix);
+    public static String preOrder(AlipayTradeAppPayModel model, String suffix) throws Exception {
+        return preOrder4App(model, suffix);
     }
 
     /**
@@ -287,12 +282,12 @@ public class AlipayAssistant {
                 // 私钥
                 AlipayConfigurations.getPrivateKey(),
                 // 固定值json，参数类型，
-                "json",
+                AlipayConstants.FORMAT_JSON,
                 // 编码方式
                 AlipayConstants.CHARSET_UTF8,
                 // 公钥
                 AlipayConfigurations.getPublicKey(),
-                "RSA2");
+                AlipayConstants.SIGN_TYPE_RSA2);
         // 实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay
         AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
         request.setBizModel(model);
@@ -376,9 +371,10 @@ public class AlipayAssistant {
 
     /**
      * 异步回调返回参数
+     *
      * @return
      */
-    public static String echo(){
+    public static String echo() {
         return "success";
     }
 

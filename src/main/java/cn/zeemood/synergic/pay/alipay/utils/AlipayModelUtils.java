@@ -6,6 +6,7 @@ import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.domain.AlipayTradePagePayModel;
 import com.alipay.api.domain.AlipayTradeRefundModel;
 import com.alipay.api.domain.AlipayTradeWapPayModel;
+import com.alipay.api.internal.util.StringUtils;
 
 /**
  * 业务参数填写工具类
@@ -76,13 +77,15 @@ public class AlipayModelUtils {
 		model.setOutTradeNo(outTradeNo);
 		model.setProductCode("FAST_INSTANT_TRADE_PAY");
 		if(AlipayConfigurations.getPayEnviroment()){
-			model.setTotalAmount(totalAmount.toString());
+			model.setTotalAmount(totalAmount.setScale(2).toString());
 		}else{
 			model.setTotalAmount("0.01");
 		}
 		model.setSubject(subject);
 		model.setBody(body);
-		model.setPassbackParams(passbackParams);
+		if(StringUtils.areNotEmpty(passbackParams)){
+			model.setPassbackParams(passbackParams);
+		}
 		return model;
 	}
 
