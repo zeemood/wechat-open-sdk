@@ -5,12 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.zeemood.wechat</groupId>
-    <artifactId>wechat-open-jdk</artifactId>
+    <artifactId>wechat-open-sdk</artifactId>
     <version>2.0.0</version>
     <packaging>pom</packaging>
 
-    <name>wechat-open-jdk</name>
-    <!-- FIXME change it to the project's website -->
+    <name>wechat-open-sdk</name>
     <url>https://github.com/zeemood/wechat-open-sdk</url>
 
     <properties>
@@ -20,6 +19,11 @@
         <slf4j.version>1.7.25</slf4j.version>
         <fastjson.version>1.2.47</fastjson.version>
     </properties>
+
+    <modules>
+        <module>wechat-open-sdk-common</module>
+        <module>wechat-open-sdk-login-spring-boot-starter</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>

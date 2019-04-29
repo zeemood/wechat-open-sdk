@@ -1,7 +1,8 @@
 
 .idea
 src/main/main.iml
-synergic-developing.iml
+wechat-open-sdk.iml
 target
 hs_err_pid*.log
 relay_pid*.log
+
