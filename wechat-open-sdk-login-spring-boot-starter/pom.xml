@@ -6,11 +6,12 @@
         <groupId>com.github.zeemood.wechat</groupId>
         <artifactId>wechat-open-sdk</artifactId>
         <version>2.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.zeemood.wechat</groupId>
     <artifactId>wechat-open-sdk-login-spring-boot-starter</artifactId>
     <name>wechat-open-sdk-login-spring-boot-starter</name>
+    <version>${parent.version}</version>
     <description>微信登录模块</description>
 
     <properties>
@@ -45,7 +46,7 @@
         <dependency>
             <groupId>com.github.zeemood.wechat</groupId>
             <artifactId>wechat-open-sdk-common</artifactId>
-            <version>2.0.0</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>

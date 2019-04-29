@@ -6,11 +6,12 @@
 		<groupId>com.github.zeemood.wechat</groupId>
 		<artifactId>wechat-open-sdk</artifactId>
 		<version>2.0.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.zeemood.wechat</groupId>
 	<artifactId>wechat-open-sdk-common</artifactId>
 	<name>wechat-open-sdk-common</name>
+    <version>${parent.version}</version>
 	<description>微信工具通用包</description>
 
 	<properties>
