@@ -1,4 +1,4 @@
-# synergic-developing
+# wechat-open-jdk
 
 ----------------------------
 
