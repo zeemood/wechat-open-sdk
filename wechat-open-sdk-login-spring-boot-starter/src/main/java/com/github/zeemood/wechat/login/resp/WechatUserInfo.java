@@ -1,7 +1,11 @@
 package com.github.zeemood.wechat.login.resp;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.github.zeemood.wechat.login.util.StringEncoder;
+import com.vdurmont.emoji.EmojiParser;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 
 /**
  * 微信用户信息
@@ -10,7 +14,7 @@ import lombok.Data;
  * @date 2019/4/28
  */
 @Data
-public class WechatUserInfo extends BaseResp{
+public class WechatUserInfo extends BaseResp {
 
     /**
      * 普通用户的标识，对当前开发者帐号唯一
@@ -49,4 +53,115 @@ public class WechatUserInfo extends BaseResp{
      * 用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的unionid是唯一的。
      */
     private String unionid;
+
+    public String getNickname(){
+        return getNickname("utf-8");
+    }
+
+    public String getCity(){
+        return getCity("utf-8");
+    }
+
+    public String getProvince(){
+        return getProvince("utf-8");
+    }
+    public String getCountry(){
+        return getCountry("utf-8");
+    }
+
+    /**
+     * 转换昵称
+     *
+     * @param charset
+     * @return
+     */
+    public String getNickname(String charset) {
+        return encode(this.nickname, charset, false);
+    }
+
+    /**
+     * 转换昵称
+     *
+     * @param charset
+     * @param parseEmoji
+     * @return
+     */
+    public String getNickname(String charset, boolean parseEmoji) {
+        return encode(this.nickname, charset, parseEmoji);
+    }
+
+    /**
+     * 转换省份
+     *
+     * @param charset
+     * @return
+     */
+    public String getCity(String charset) {
+        return encode(this.city, charset, false);
+    }
+
+    /**
+     * 转换省份字符串编码并转换emoji，适用于没有utf8mb4编码的数据库
+     *
+     * @param charset
+     * @param parseEmoji
+     * @return
+     */
+    public String getCity(String charset, boolean parseEmoji) {
+        return encode(this.city, charset, parseEmoji);
+    }
+
+    /**
+     * 转换省份
+     *
+     * @param charset
+     * @return
+     */
+    public String getProvince(String charset) {
+        return encode(this.province, charset, false);
+    }
+
+    /**
+     * 转换省份字符串编码并转换emoji，适用于没有utf8mb4编码的数据库
+     *
+     * @param charset
+     * @param parseEmoji
+     * @return
+     */
+    public String getProvince(String charset, boolean parseEmoji) {
+        return encode(this.province, charset, parseEmoji);
+    }
+
+    /**
+     * 转换国家
+     *
+     * @param charset
+     * @return
+     */
+    public String getCountry(String charset) {
+        return encode(this.country, charset, false);
+    }
+
+    /**
+     * 转换国家字符串编码
+     *
+     * @param charset
+     * @param parseEmoji
+     * @return
+     */
+    public String getCountry(String charset, boolean parseEmoji) {
+        return encode(this.country, charset, parseEmoji);
+    }
+
+    private String encode(String source, String charset, boolean parseEmoji) {
+        Validate.notEmpty(charset, "转换编码不能为空");
+        if (StringUtils.isEmpty(source)) {
+            return source;
+        }
+        String encode = StringEncoder.encode(source, "ISO8859-1", charset);
+        if (parseEmoji) {
+            encode = EmojiParser.parseToAliases(encode);
+        }
+        return encode;
+    }
 }
