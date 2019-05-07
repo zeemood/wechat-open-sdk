@@ -9,4 +9,4 @@
 
 ## 快速开始
 
-[https://github.com/zeemood/wechat-open-sdk/wiki/Wechat-Open-SDK-%E5%BC%95%E8%A8%80](快速开始)
+[快速开始](https://github.com/zeemood/wechat-open-sdk/wiki/Wechat-Open-SDK-%E5%BC%95%E8%A8%80)
