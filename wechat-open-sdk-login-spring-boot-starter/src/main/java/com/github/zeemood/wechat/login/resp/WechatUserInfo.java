@@ -153,7 +153,7 @@ public class WechatUserInfo extends BaseResp {
         return encode(this.country, charset, parseEmoji);
     }
 
-    private String encode(String source, String charset, boolean parseEmoji) {
+    protected String encode(String source, String charset, boolean parseEmoji) {
         Validate.notEmpty(charset, "转换编码不能为空");
         if (StringUtils.isEmpty(source)) {
             return source;

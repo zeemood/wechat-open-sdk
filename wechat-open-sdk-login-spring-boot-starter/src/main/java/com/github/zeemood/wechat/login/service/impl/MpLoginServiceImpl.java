@@ -48,7 +48,7 @@ public class MpLoginServiceImpl extends WechatLoginServiceImpl<MpProperties> {
         return wechatUserInfo;
     }
 
-    private String achieveAccessToken() {
+    public String achieveAccessToken() {
         MpProperties properties = getProperties();
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Map> forEntity = restTemplate.getForEntity(String.format(ACCESS_TOKEN_ACHIEVE_URL, properties.getAppid(), properties.getAppSecret()), Map.class);
