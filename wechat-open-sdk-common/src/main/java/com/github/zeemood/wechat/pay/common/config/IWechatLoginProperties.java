@@ -1,4 +1,4 @@
-package com.github.zeemood.wechat.common.config;
+package com.github.zeemood.wechat.pay.common.config;
 
 /**
  * @author zhang.shushan

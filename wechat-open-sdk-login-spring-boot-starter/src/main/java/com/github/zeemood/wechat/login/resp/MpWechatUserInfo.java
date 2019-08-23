@@ -2,11 +2,7 @@ package com.github.zeemood.wechat.login.resp;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.github.zeemood.wechat.login.enums.SubscribeSceneEnum;
-import com.github.zeemood.wechat.login.util.StringEncoder;
-import com.vdurmont.emoji.EmojiParser;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 import java.util.Date;
 

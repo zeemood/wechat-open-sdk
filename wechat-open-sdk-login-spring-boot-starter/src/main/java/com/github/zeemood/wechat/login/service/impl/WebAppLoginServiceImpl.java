@@ -1,6 +1,6 @@
 package com.github.zeemood.wechat.login.service.impl;
 
-import com.github.zeemood.wechat.common.config.webapp.WebAppProperties;
+import com.github.zeemood.wechat.pay.common.config.webapp.WebAppProperties;
 import com.github.zeemood.wechat.login.util.WebAppLoginUrlBuilder;
 
 /**

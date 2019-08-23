@@ -1,7 +1,7 @@
 package com.github.zeemood.wechat.login.config.mobileapp;
 
-import com.github.zeemood.wechat.common.config.mobileapp.MobileAppProperties;
 import com.github.zeemood.wechat.login.service.impl.MobileAppLoginServiceImpl;
+import com.github.zeemood.wechat.pay.common.config.mobileapp.MobileAppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

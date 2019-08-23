@@ -11,7 +11,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.22</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -42,6 +41,7 @@
     <modules>
         <module>wechat-open-sdk-common</module>
         <module>wechat-open-sdk-login-spring-boot-starter</module>
+        <module>wechat-open-sdk-pay-spring-boot-starter</module>
     </modules>
 
     <dependencyManagement>

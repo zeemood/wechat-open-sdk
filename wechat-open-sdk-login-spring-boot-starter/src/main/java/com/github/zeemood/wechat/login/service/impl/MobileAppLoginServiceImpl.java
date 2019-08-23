@@ -1,6 +1,6 @@
 package com.github.zeemood.wechat.login.service.impl;
 
-import com.github.zeemood.wechat.common.config.mobileapp.MobileAppProperties;
+import com.github.zeemood.wechat.pay.common.config.mobileapp.MobileAppProperties;
 
 /**
  * 移动应用登录
