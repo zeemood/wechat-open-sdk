@@ -11,7 +11,7 @@ import com.github.zeemood.wechat.pay.service.IWechatRefundService;
 import com.github.zeemood.wechat.pay.utils.AESUtil;
 import com.github.zeemood.wechat.pay.utils.DataSignatureUtil;
 import com.github.zeemood.wechat.pay.utils.XmlUtils;
-import lombok.Getter;
+import lombok.Data;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.StreamUtils;
@@ -29,7 +29,7 @@ import java.util.TreeMap;
  * @author zeemoo
  * @since 2019/8/23 23:58
  */
-@Getter
+@Data
 public abstract class AbstractWechatBusinessService<
         C extends IWechatPayProperties
         , V

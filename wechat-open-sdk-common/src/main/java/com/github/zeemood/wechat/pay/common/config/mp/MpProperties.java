@@ -1,6 +1,7 @@
 package com.github.zeemood.wechat.pay.common.config.mp;
 
 import com.github.zeemood.wechat.pay.common.config.IWechatLoginProperties;
+import com.github.zeemood.wechat.pay.common.config.IWechatPayProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -12,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @ConfigurationProperties("zeemoo.wechat.mp")
-public class MpProperties implements IWechatLoginProperties {
+public class MpProperties implements IWechatLoginProperties, IWechatPayProperties {
     /**
      * 应用id
      */
@@ -37,4 +38,20 @@ public class MpProperties implements IWechatLoginProperties {
      * 支付回调地址
      */
     private String payCallbackUrl;
+
+    /**
+     * app在应用市场的名字
+     */
+    private String appName;
+
+    /**
+     * 退款回调地址
+     */
+    private String refundNotifyUrl;
+
+    /**
+     * e
+     * 退款证书地址
+     */
+    private String certificatePath;
 }
