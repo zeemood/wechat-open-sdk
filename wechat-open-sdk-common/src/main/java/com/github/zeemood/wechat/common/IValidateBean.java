@@ -1,4 +1,4 @@
-package com.github.zeemood.wechat.pay.common;
+package com.github.zeemood.wechat.common;
 
 /**
  * <p>

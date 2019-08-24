@@ -1,6 +1,6 @@
 package com.github.zeemood.wechat.pay.req;
 
-import com.github.zeemood.wechat.pay.common.IValidateBean;
+import com.github.zeemood.wechat.common.IValidateBean;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.simpleframework.xml.Element;

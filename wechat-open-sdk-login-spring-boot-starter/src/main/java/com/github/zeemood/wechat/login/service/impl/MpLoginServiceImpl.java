@@ -2,7 +2,7 @@ package com.github.zeemood.wechat.login.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.github.zeemood.wechat.login.enums.UserInfoLangEnum;
-import com.github.zeemood.wechat.pay.common.config.mp.MpProperties;
+import com.github.zeemood.wechat.common.config.mp.MpProperties;
 import com.github.zeemood.wechat.login.enums.ScopeEnum;
 import com.github.zeemood.wechat.login.exception.WechatLoginRespException;
 import com.github.zeemood.wechat.login.resp.MpWechatUserInfo;

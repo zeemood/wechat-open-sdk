@@ -1,4 +1,4 @@
-package com.github.zeemood.wechat.pay.common.config;
+package com.github.zeemood.wechat.common.config;
 
 /**
  * 微信支付接口类

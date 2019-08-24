@@ -1,7 +1,7 @@
 package com.github.zeemood.wechat.pay.req.extend;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.github.zeemood.wechat.pay.common.IValidateBean;
+import com.github.zeemood.wechat.common.IValidateBean;
 import com.github.zeemood.wechat.pay.enums.WechatPayResultEnum;
 import com.github.zeemood.wechat.pay.exception.WechatPayException;
 import com.github.zeemood.wechat.pay.utils.ConstUtils;

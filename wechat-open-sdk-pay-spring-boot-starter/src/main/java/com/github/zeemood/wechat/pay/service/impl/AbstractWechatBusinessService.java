@@ -1,6 +1,6 @@
 package com.github.zeemood.wechat.pay.service.impl;
 
-import com.github.zeemood.wechat.pay.common.config.IWechatPayProperties;
+import com.github.zeemood.wechat.common.config.IWechatPayProperties;
 import com.github.zeemood.wechat.pay.enums.ResultEnum;
 import com.github.zeemood.wechat.pay.exception.WechatPayException;
 import com.github.zeemood.wechat.pay.req.PreBillRequest;

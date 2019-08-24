@@ -1,4 +1,4 @@
-package com.github.zeemood.wechat.login.config;
+package com.github.zeemood.wechat.common.config;
 
 /**
  * @author zhang.shushan

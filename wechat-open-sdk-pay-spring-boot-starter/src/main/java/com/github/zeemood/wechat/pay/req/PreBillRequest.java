@@ -1,7 +1,6 @@
 package com.github.zeemood.wechat.pay.req;
 
-import com.github.zeemood.wechat.pay.common.IValidateBean;
-import com.github.zeemood.wechat.pay.enums.TradeTypeEnum;
+import com.github.zeemood.wechat.common.IValidateBean;
 import lombok.Data;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;

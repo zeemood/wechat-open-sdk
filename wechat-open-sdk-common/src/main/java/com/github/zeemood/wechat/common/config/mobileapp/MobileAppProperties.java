@@ -1,19 +1,19 @@
-package com.github.zeemood.wechat.pay.common.config.mp;
+package com.github.zeemood.wechat.common.config.mobileapp;
 
-import com.github.zeemood.wechat.pay.common.config.IWechatLoginProperties;
-import com.github.zeemood.wechat.pay.common.config.IWechatPayProperties;
+import com.github.zeemood.wechat.common.config.IWechatLoginProperties;
+import com.github.zeemood.wechat.common.config.IWechatPayProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * 微信公众号配置项
+ * 移动app的配置
  *
  * @author zhang.shushan
  * @date 2019/4/29
  */
 @Data
-@ConfigurationProperties("zeemoo.wechat.mp")
-public class MpProperties implements IWechatLoginProperties, IWechatPayProperties {
+@ConfigurationProperties("zeemoo.wechat.mobile")
+public class MobileAppProperties implements IWechatLoginProperties, IWechatPayProperties {
     /**
      * 应用id
      */
@@ -23,7 +23,7 @@ public class MpProperties implements IWechatLoginProperties, IWechatPayPropertie
      */
     private String appSecret;
     /**
-     * 登录回调地址
+     * 登录回调地址,移动应用可以忽略，没有授权域的限制
      */
     private String loginCallbackUrl;
     /**
@@ -54,4 +54,5 @@ public class MpProperties implements IWechatLoginProperties, IWechatPayPropertie
      * 退款证书地址
      */
     private String certificatePath;
+
 }

@@ -1,6 +1,6 @@
-package com.github.zeemood.wechat.pay.common.config.webapp;
+package com.github.zeemood.wechat.common.config.webapp;
 
-import com.github.zeemood.wechat.pay.common.config.IWechatLoginProperties;
+import com.github.zeemood.wechat.common.config.IWechatLoginProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

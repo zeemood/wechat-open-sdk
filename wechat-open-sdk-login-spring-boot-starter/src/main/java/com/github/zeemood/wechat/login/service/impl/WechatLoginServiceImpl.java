@@ -3,7 +3,7 @@ package com.github.zeemood.wechat.login.service.impl;
 import com.github.zeemood.wechat.login.enums.UserInfoLangEnum;
 import com.github.zeemood.wechat.login.resp.AccessTokenCheckResp;
 import com.github.zeemood.wechat.login.util.ResponseConverter;
-import com.github.zeemood.wechat.pay.common.config.IWechatLoginProperties;
+import com.github.zeemood.wechat.common.config.IWechatLoginProperties;
 import com.github.zeemood.wechat.login.resp.AccessTokenResp;
 import com.github.zeemood.wechat.login.resp.RefreshTokenResp;
 import com.github.zeemood.wechat.login.resp.WechatUserInfo;
