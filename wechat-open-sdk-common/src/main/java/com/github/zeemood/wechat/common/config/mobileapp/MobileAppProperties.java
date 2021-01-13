@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 移动app的配置
  *
- * @author zhang.shushan
+ * @author zeemoo
  * @date 2019/4/29
  */
 @Data
